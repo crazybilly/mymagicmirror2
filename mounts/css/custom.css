@@ -1,0 +1,8 @@
+.digital .time {
+    font-weight: 600;
+    font-size: 800%;
+}
+
+.sun .bright {
+    color: var(--color-text-dimmed)
+}

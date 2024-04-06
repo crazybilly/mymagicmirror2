@@ -1,0 +1,35 @@
+ARG buildarch
+ARG BUILDER_IMG
+ARG BASE_IMG
+FROM ${BUILDER_IMG} as builder
+FROM ${BASE_IMG}
+LABEL maintainer="Karsten Hassel"
+
+RUN set -e; \
+    useradd -u 1000 node; \
+    echo "node ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers;
+
+WORKDIR /opt/magic_mirror
+
+USER node
+
+# copy startscripts into container:
+COPY --chown=node:node *.sh /opt/magic_mirror/
+COPY --from=builder --chown=node:node /opt/magic_mirror /opt/magic_mirror
+
+ARG GIT_INFO
+RUN set -e; \
+    chmod +x *.sh; \
+    ./build_info.sh "Runtime" "$GIT_INFO"; \
+    rm -f build_info.sh;
+
+ARG NODE_ENV
+ENV ELECTRON_DISABLE_SANDBOX=1 \
+    DBUS_SESSION_BUS_ADDRESS="unix:path=/var/run/dbus/system_bus_socket" \
+    NODE_ENV=${NODE_ENV} \
+    MM_OVERRIDE_DEFAULT_MODULES=true \
+    MM_OVERRIDE_CSS=true
+
+EXPOSE 8080
+
+ENTRYPOINT ["/usr/bin/tini", "--", "./entrypoint.sh"]

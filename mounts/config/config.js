@@ -60,28 +60,43 @@ let config = {
         },
 		{
 			module: "calendar",
-			header: "jaketolbert",
+			header: "Family Calendar",
 			position: "top_left",
 			config: {
+                fade: false,
+                // dateFormat: "ddd, MMM D",
+                maximumEntries: 15,
+                maximumNumberofDays: 4,
+                hideOngoing: true,
+                dateFormat: "ddd h:mm", // Format for displaying date and time
+                fullDayEventDateFormat: "ddd", // Format for full-day events
+                timeFormat: "absolute", // Show absolute time
+                getRelative: 12, // Display relative time for events within 12 hours
+                urgency: 0, //
+                nextDaysRelative: false,
+                coloredText: true,
 				calendars: [
 					{
-						fetchInterval: 7 * 24 * 60 * 60 * 1000,
-						symbol: "calendar-check",
-						url: "https://calendar.google.com/calendar/ical/jaketolbert%40gmail.com/public/basic.ics"
+						fetchInterval: 600000 , // 7 * 24 * 60 * 60 * 1000,
+						symbol: "people-roof",
+                        color: '#FFFFFF',
+						url: "https://calendar.google.com/calendar/ical/jenntolbert%40gmail.com/private-cfbe001f3c7aa48b153afdfb5f9f83e5/basic.ics"
 					}
-				]
-			}
-		},
-		{
-			module: "calendar",
-			header: "US Holidays",
-			position: "top_left",
-			config: {
-				calendars: [
-					{
-						fetchInterval: 7 * 24 * 60 * 60 * 1000,
-						symbol: "calendar-check",
-						url: "https://ics.calendarlabs.com/76/mm3137/US_Holidays.ics"
+
+					,{
+						fetchInterval: 600000 , // 7 * 24 * 60 * 60 * 1000,
+						symbol: "building",
+                        color: "#FDB515",
+                        name: "JakesWork",
+						url: "https://calendar.google.com/calendar/ical/jaketolbert%40berkeley.edu/private-fd25deb6846f8224290fcf6d86fe3f1d/basic.ics"
+
+					}
+
+					,{
+						fetchInterval: 600000 , // 7 * 24 * 60 * 60 * 1000,
+						symbol: "person-running",
+                        color: '#808080',
+						url: "https://calendar.google.com/calendar/ical/jonahtolbert%40gmail.com/private-b8f3079183dc75f7e809e5bcc45b7cd9/basic.ics"
 					}
 				]
 			}
@@ -102,27 +117,95 @@ let config = {
     			apiKey: "7sIjLxJAQepY1qtm1taCKquH2kaMKj1U",
     			lat: "39.842468",
     			lon: "-88.953148",
+                tableClass: "xlarge",
     			roundTemp: true,
     			showWindDirection: false,
 	    		showFeelsLike: true
             }
 		},
+
+		{
+		    module: "weather",
+		    position: "top_right",
+		    header: "Forecast",
+		    config: {
+		        weatherProvider: "weathergov",
+		        apiBase: "https://api.weather.gov/points/",
+		        weatherEndpoint: "/forecast",
+    			lat: "39.842468",
+    			lon: "-88.953148",
+		        type: "forecast",
+                fade: false,
+                tableClass: "medium",
+		        maxNumberOfDays: 4,
+				roundTemp: true,
+		        showPrecipitationProbability: true
+		    }
+		},
+       
+        /*
 		{
             module: "weather",
 			position: "top_right",
 			header: "Weather Forecast",
 			config: {
 				weatherProvider: "openmeteo",
-				type: "daily",
+				type: "forecast",
 				fade: false,
-				showPrecipitationProbability: true,
 				roundTemp: true,
 				apiBase: "https://api.open-meteo.com/v1",
-				initialLoadDelay: 5000,
+                showPrecipitationAmount: false,
+		        showPrecipitationProbability: true,
+				initialLoadDelay: 1000,
+                updateInterval: 600000,
 				lat: "39.842468",
 				lon: "-88.953148"
 			}
 		},
+        */
+
+		{
+		    module: 'MMM-Chart',
+			position: "top_right",
+		    config: {
+		        name: 'traffic',
+		        url: 'https://api.open-meteo.com/v1/forecast?latitude=39.9&longitude=-88.5&hourly=surface_pressure&past_days=1&forecast_days=1',
+		        graphStyle: 'line'
+		    }
+		},
+
+
+		{
+		    disabled: false,
+		    module: 'MMM-RAIN-RADAR',
+		    position: 'top_right',
+		    config: {
+		        useHeader: true, // true if you want a header
+				lat: "39.842468",
+				lon: "-90.5",
+		        area: 'IL', // US State
+		        zoomLevel: 6,
+		        mapType: 2, //0-Road Map 1-Satellite 2-Dark Map 3-OpenStreetMaps 4-Light Map
+		        color: 3, //0-Original 1-Universal Blue 2-TITAN 3-The Weather Channel 5-NEXRAD Level-III 6-RAINBOW @ SELEX-SI
+		        snow: 1,
+		        smoothing: 1,
+		        opacity: 95,
+		        fastAnimation: 0,
+		        coverage: 0,
+		        darkTheme: 1,
+		        UTCtime: 0,
+		        legend: 0,
+		        legendMin: 0, //set legend to 1 if you want legendMin to show
+		        animate: 0,
+		        updateOnWarning: 1, // 1: after updateInterval, weather warnings for your US states will be used to determine if module should be hidden. 0 module is perpertually displayed
+		        updateInterval: 60 * 60 * 1000, // number of milliseconds. change 5 to 60 and it will update each 10 minutes
+		    }
+		},
+
+
+
+
+/*
 		{
 			module: "newsfeed",
 			position: "bottom_bar",
@@ -139,6 +222,7 @@ let config = {
 				broadcastNewsUpdates: true
 			}
 		},
+*/
 	]
 };
 

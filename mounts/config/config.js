@@ -45,7 +45,7 @@ let config = {
 		},
         {
 			module: "clock",
-			position: "top_left",
+			position: "top_center",
 			config: {
 				timeFormat: 12,
 				timezone: "America/Chicago",
@@ -61,7 +61,7 @@ let config = {
 		{
 			module: "calendar",
 			header: "Family Calendar",
-			position: "top_left",
+			position: "bottom_left",
 			config: {
                 fade: false,
                 // dateFormat: "ddd, MMM D",
@@ -107,7 +107,7 @@ let config = {
 		//},
 		{
             module: "weather",
-			position: "top_right",
+			position: "upper_third",
 			config: {
 			    weatherProvider: "pirateweather",
     			type: "current",
@@ -126,7 +126,7 @@ let config = {
 
 		{
 		    module: "weather",
-		    position: "top_right",
+		    position: "upper_third",
 		    header: "Forecast",
 		    config: {
 		        weatherProvider: "weathergov",
@@ -164,6 +164,7 @@ let config = {
 		},
         */
 
+        /*
 		{
 		    module: 'MMM-Chart',
 			position: "top_right",
@@ -173,12 +174,12 @@ let config = {
 		        graphStyle: 'line'
 		    }
 		},
-
+*/
 
 		{
 		    disabled: false,
 		    module: 'MMM-RAIN-RADAR',
-		    position: 'top_right',
+		    position: 'bottom_right',
 		    config: {
 		        useHeader: true, // true if you want a header
 				lat: "39.842468",
